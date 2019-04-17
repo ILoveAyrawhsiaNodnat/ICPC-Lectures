@@ -1,0 +1,184 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{tikzit}
+\usepackage{booktabs}
+
+%%%%%%%%%%%%%%hyperlink %%%%%%%%%%%%%
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+ 
+\urlstyle{same}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%% Algorithm package %%%%%%%%%%
+\usepackage{algorithm, algpseudocode}
+\algdef{SE}[SUBALG]{Indent}{EndIndent}{}{\algorithmicend\ }%
+\algtext*{Indent}
+\algtext*{EndIndent}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%% Mdframed settings %%%%%%%%%%%
+\usepackage[framemethod = TikZ]{mdframed}
+\input{sample.tikzstyles}
+\mdfsetup{skipabove = \topskip, skipbelow = \topskip}
+\global\mdfdefinestyle{exampledefault}{%
+    outerlinewidth = 1pt, innerlinewidth = 0pt,
+    outerlinecolor = blue, roundcorner = 5pt
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%% Theorems, Proofs %%%%%%%%%%%%
+% ref: https://www.overleaf.com/learn/latex/Theorems_and_proofs
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{observation}{Observation}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+% for adding unnumbered theorems
+% \theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%% Math and Symbols %%%%%%%%%%%%
+\usepackage{amsmath, amssymb}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%  Macros  %%%%%%%%%%%%%%
+\newcommand{\true}{\texttt{TRUE}}
+\newcommand{\false}{\texttt{FALSE}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\title{2-SAT and Biconnected Components}
+\author{bhavit.sharma804 }
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{2-sat}
+\subsection{Introduction}
+\paragraph{} Consider a boolean function
+\[
+	f = (x_1 \lor y_1)\land(x_2 \land y_2) \cdots (x_n \lor y_n)
+\]
+
+\par \textit{Is $f$ satisfiable?}
+To make $(a \lor b) = 1$, we need to consider two cases:
+\begin{itemize}
+	\item if $a = 0$, then $b$ must be either $1/0$. Hence $-a \implies b$
+	\item if $b = 0$, then $a$ must be either $1/0$. Hence $-b \implies a$
+\end{itemize}
+
+Hence, for every clause $a \lor b$, we will add two clauses $(-a \implies b)$ and $-b \implies a$
+in the graph. For example, if our clause
+\[
+    \phi = (-x \lor y) \land (-y \lor z) \land (x \lor -z) \land (z \lor y)
+\]
+
+Hence, our 2-CNF graph will look like this.\\
+\ctikzfig{fig1}
+
+\subsection{Solution}
+Let's say we have $n$ clauses in our boolean function. The total number of vertices and edges in
+graph are $\mathcal{O}(n)$. Some observations which might help us.
+
+\begin{observation}
+    \label{Obs1}
+    If there exists a path from node $i$ to $j$, then there exists a path from node
+    $-j$ to $-i$.
+\end{observation}
+
+\begin{proof}
+    This is because whenever we insert $a \implies b$ to the set, we also insert
+    $-b \implies -a$ in the set. Hence, if there exists a path $(a, a_1, a_2, \cdots, b)$
+    then, the path $(-b, \cdots, -a_2, -a_1, -a)$.
+\end{proof}
+
+\begin{observation}
+    \label{Necessary}
+    If there exists a path from $x$ to $-x$ and path from $-x$ to $x$, then
+    boolean function is not satisfiable.
+\end{observation}
+
+\begin{proof}
+    Let us assign the value of \texttt{TRUE} to $x$. Since, a path from $-x$ exists,
+    we will get the value of $-x$ to be \texttt{TRUE} which is a contradiction.
+    If we assign the value of $x$ to be \texttt{FALSE}, we again get a contradiction,
+    since path from $-x$ to $x$ exists. 
+\end{proof}
+
+\begin{observation}
+    As it turns out, Observation \ref{Necessary} is both Necessary and Sufficient.
+\end{observation}
+
+\begin{proof}
+    To begin the proof of the \textit{sufficient} condition, we will present a constructive
+    algorithm and then analyse its correctness.
+\end{proof}
+    \begin{mdframed}[frametitle = Algorithm, style = exampledefault]
+        \begin{itemize}
+            \item Create the directed graph and decompose it into Strongly Connected Components(SCC).
+            \item Topological sort the SCCs and create an array \texttt{comp[i]} denotes the position of node's SCC in top-sort of the SCCs.
+            \item If \texttt{comp[i] < comp[-i]}, then we assign $i =$ \texttt{FALSE} else \texttt{TRUE} otherwise.
+            \item If \texttt{comp[i] == comp[-i]}, then it's not satisfiable.
+        \end{itemize}
+    \end{mdframed}
+    Now, let us consider the case when $x = $ \true\ i.e. \texttt{comp[-i] < comp[i]},
+    which means that $x$ and $-x$ \textbf{doesn't lie} in the same component.
+
+\begin{theorem}
+    There doesn't exists a node $y$ such that $-x$ has a path to $y$ and $-y$, both.
+\end{theorem}
+
+\begin{proof}
+    We'll prove this by contradiction. If $y, -y$ are reachable from $-x$, then $x$ is reachable from $-y, y$
+    (By Observation \ref{Obs1}). Hence, $x$ is reachable from $-x$, and $-x$ is reachable from $x$, which means
+    that they lie in the same component (a contradiction).
+\end{proof}
+
+We have constructed an algorithm which find the correct value of the constraints,
+under the assumption that $x$ and $-x$ lie in different components. Hence, we have proved that the Observation \ref{Necessary}
+is both Necessary and Sufficient.
+
+\subsection{Conversion of Two-variable Boolean Function}
+Till now we've seen the clauses to be boolean function of \textsc{logical or}, but the
+clauses can be any function, like \textsc{xor, nand, nor} etc. For example our boolean function
+might look like this.
+\[
+    f = (x_1 \text{xor} x_2) \land (-x_1 \lor x_3) \land (-x_3 \text{nand} x_1)
+\]
+To convert any boolean(2 variables) function into an equivalent 2-CNF form, we'll perform the
+\textit{Products of Sum} transformation to the truth table of the boolean function. For example, the
+truth table of \textsc{xor} is:
+
+\begin{center}
+\begin{table}[htb]
+\begin{tabular}{|l|l|l|}
+\hline
+0 & 1 & 1 \\ \hline
+0 & 0 & 0 \\ \hline
+1 & 1 & 0 \\ \hline
+1 & 0 & 1 \\ \hline
+\end{tabular}
+\end{table}
+\end{center}
+
+So, its POS is $(a + -b)(-a + b) = (a \lor -b) \land (-a \lor b)$.
+
+\subsection{Implementation}
+\href{https://github.com/Equlnox/IITP-ACM-Notebook/blob/master/code/graphs/2sat.cpp}{Link to Code}. The code
+is implemented in such a way that you just have to provide the truth table of the boolean function to class, and it'll handle all of the stuff.
+Important thing to keep in mind is, it's $1$ based indexing. To get the value of actual assignment,
+just look at the \texttt{std::vector comp[i]}
+
+\subsection{Problems}
+TODO
+\end{document}
