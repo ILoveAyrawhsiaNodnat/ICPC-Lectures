@@ -1,9 +1,6 @@
--
-  [All Haskell](https://www.notion.so/1e066c8023834420a99903cf4f11e7da)
-  
-  [Exercises](https://www.notion.so/a993a1a839664ed38c669ddad0ebb71e)
-  
-  [Advent of Code](https://www.notion.so/f2b19a640ab14f0ebcb3887fc389353e)
+- [[All Haskell]]
+  [[Haskell Exercises]]
+  [[Advent of Code]]
 - [ ]  How to write tests?
 - [x]  Setup Haskell on vscode with stack.
 - [ ]  Haskell repl on vscode.
