@@ -16,13 +16,11 @@
 collapsed:: true
 # Types
 	- `newtypes` (kind of like alias with one constructor and one param. It creates ismorphic types), `type` (Synonym types), `data`
-- LATER [https://wiki.haskell.org/Newtype](https://wiki.haskell.org/Newtype)
+- NOW [https://wiki.haskell.org/Newtype](https://wiki.haskell.org/Newtype)
   done:: 1623209986120
-  later:: 1623209986878
-  [https://en.wikibooks.org/wiki/Yet_Another_Haskell_Tutorial/Type_advanced](https://en.wikibooks.org/wiki/Yet_Another_Haskell_Tutorial/Type_advanced)
-  
-  WikiBooks haskell.
-  
+  later:: 1623210255546
+  now:: 1623210255983
+  [Advanced Types Haskell](https://en.wikibooks.org/wiki/Yet_Another_Haskell_Tutorial/Type_advanced)
   Consider this:
   
   ```haskell
