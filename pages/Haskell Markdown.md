@@ -41,5 +41,6 @@ collapsed:: true
 - Fuck emacs, it's a slow piece of shit.
 - Some packages are LTS which will automatically work, but for some non LTS packages, we'll need [https://docs.haskellstack.org/en/stable/GUIDE/#curated-package-sets](https://docs.haskellstack.org/en/stable/GUIDE/#curated-package-sets)
 - To add a package, add it in `package.yaml` under `dependencies`.[https://docs.haskellstack.org/en/stable/README/#workflow](https://docs.haskellstack.org/en/stable/README/#workflow)
-#
-- Function with more than one argument can take a single argument and return another function.
+# Function Currying
+	- Function with more than one argument can take a single argument and return another function.
+	- This is the first class feature of haskell.
