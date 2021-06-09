@@ -73,4 +73,5 @@
  ;; Rose is red, violet's blue. Life's ordered: Org assists you.
  :macros {}
  :editor/logical-outdenting? true
- :markdown/version 2}
+ :markdown/version 2
+ :preferred-format :markdown}
