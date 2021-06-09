@@ -1,2 +1,3 @@
 * This is my first journal on the website!
-** I created a new
+** I copied my notes of [[Haskell Markdown]] from Notion to logseq.
+**
