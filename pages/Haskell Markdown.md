@@ -8,8 +8,7 @@
 - [x]  Setup Haskell on vscode with stack.
 - [ ]  Haskell repl on vscode.
 # Setting up Projects
-
-We'll going to be using `stack` . Stack's advantage is it generates `.cabal` file automatically from the
+- We'll going to be using `stack` . Stack's advantage is it generates `.cabal` file automatically from the
 - `stack new project` This will create a new directory with the project name and necessary build files.
 - `stack setup` will download the compiler if necessary.
 - `stack build`
