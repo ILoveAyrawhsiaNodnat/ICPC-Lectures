@@ -25,9 +25,10 @@ collapsed:: true
   
   ```haskell
   data Tree a = Tip | Node a (Tree a) (Tree a)
-  ```
-  
-  `Tree` is a type constructor while `Node, Tip` are data constructors.
+  Tip :: Tree
+  Node :: a -> (Tree a) -> (Tree a) -> (Tree a)
+  -- Node is a constructor
+  ````Tree` is a type constructor while `Node, Tip` are data constructors.
 ## [Emacs](https://www.notion.so/Emacs-4d40f0147a7b40de89ee6b0011e891be) setup
 - Everything will work immediately on Emacs.
 - `C-c C-l` (or `M-x haskell-process-load-file` will load the file in repl)
