@@ -9,8 +9,7 @@
 - `stack new project` This will create a new directory with the project name and necessary build files.
 - `stack setup` will download the compiler if necessary.
 - `stack build`
-  
-  The new module name should be in capital letters ex - "Parser.hs" not "*parser.hs"*
+- The new module name should be in capital letters ex - "Parser.hs" not "*parser.hs"*
 - `hpack` is the utility which generates `.cabal` file from `package.yaml`.
 - `stack build --dry_run` will also do it.
 - [https://github.com/commercialhaskell/stack/issues/3697](https://github.com/commercialhaskell/stack/issues/3697) (Adding `stack hpack`)
@@ -18,9 +17,8 @@ collapsed:: true
 # Types
 	- `newtypes` (kind of like alias with one constructor and one param. It creates ismorphic types), `type` (Synonym types), `data`
 - LATER [https://wiki.haskell.org/Newtype](https://wiki.haskell.org/Newtype)
-  later:: 1623209986878
   done:: 1623209986120
-  
+  later:: 1623209986878
   [https://en.wikibooks.org/wiki/Yet_Another_Haskell_Tutorial/Type_advanced](https://en.wikibooks.org/wiki/Yet_Another_Haskell_Tutorial/Type_advanced)
   
   WikiBooks haskell.
