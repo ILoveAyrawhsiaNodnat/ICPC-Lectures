@@ -18,7 +18,7 @@
 - `stack build --dry_run` will also do it.
 - [https://github.com/commercialhaskell/stack/issues/3697](https://github.com/commercialhaskell/stack/issues/3697) (Adding `stack hpack`)
 # Types
-- `newtypes` (kind of like alias with one constructor and one param. It creates ismorphic types), `type` (Synonym types), `data`
+	- `newtypes` (kind of like alias with one constructor and one param. It creates ismorphic types), `type` (Synonym types), `data`
 - [https://wiki.haskell.org/Newtype](https://wiki.haskell.org/Newtype)
   
   [https://en.wikibooks.org/wiki/Yet_Another_Haskell_Tutorial/Type_advanced](https://en.wikibooks.org/wiki/Yet_Another_Haskell_Tutorial/Type_advanced)
