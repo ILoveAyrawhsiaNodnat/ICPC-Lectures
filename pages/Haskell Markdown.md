@@ -17,6 +17,7 @@
 - `hpack` is the utility which generates `.cabal` file from `package.yaml`.
 - `stack build --dry_run` will also do it.
 - [https://github.com/commercialhaskell/stack/issues/3697](https://github.com/commercialhaskell/stack/issues/3697) (Adding `stack hpack`)
+collapsed:: true
 # Types
 	- `newtypes` (kind of like alias with one constructor and one param. It creates ismorphic types), `type` (Synonym types), `data`
 - [https://wiki.haskell.org/Newtype](https://wiki.haskell.org/Newtype)
