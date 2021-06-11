@@ -6,5 +6,5 @@
 		- i => length of the array
 		- j => first element
 		- bool => whether this element will is greater than atleast one of its neighbours
-		- For example: dp[i, j, 1] = dp[i - 1, j - 1, 0] + dp[i - 1, j, 1] + dp[i - 1, j + 1, 1]
+		- For example: $dp[i, j, 1] = dp[i - 1, j - 1, 0] + dp[i - 1, j, 1] + dp[i - 1, j + 1, 1]$
 		-
